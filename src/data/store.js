@@ -4,52 +4,36 @@ import axios from 'axios';
 
 
 export const store = reactive({
-    // callApi1:"https://api.themoviedb.org/3/movie/?",
-    apiCallMovie: "https://api.themoviedb.org/3/search/movie?api_",
-    apiCallTvSeries: "https://api.themoviedb.org/3/search/tv?api_",
-    keyApi: "key=987f78e31f79816590f58712bc4ff386",
+    urlAPI: "https://api.themoviedb.org/3/",
+    apiCallMovie: "https://api.themoviedb.org/3/search/movie",
+    apiCallTvSeries: "https://api.themoviedb.org/3/search/tv",
+    keyApi: "?api_key=987f78e31f79816590f58712bc4ff386",
 
     reserchApiWhitName: "&query=",
-    textUserInput: "fast and furious",
+    textUserInput: "",
 
     imgApiPath: "https://image.tmdb.org/t/p/w500",
 
+    popular: true,
+    movie:false,
+    searies:false,
+
+    popularMovie:[],
+    popularSeries:[],
+
     movieSearched: [],
-
-
-
-
-
-    //if backdrop_path == null cosa faccio?
-    //if lang en == bandiera
+    seriesSerched: [],
 
 
     callApi() {
-        let visti = []
-
+        // let visti = []
         axios.get(this.apiCallMovie + this.keyApi + this.reserchApiWhitName + this.textUserInput)
             .then(response => {
-                // this.movieSearched = response.data.results
-                visti = response.data.results
-                // console.log(this.imgApiPath + this.movieSearched[14].poster_path);
-                // console.log(this.movieSearched[0].original_language);
-                
-                axios.get(this.apiCallTvSeries + this.keyApi + this.reserchApiWhitName + this.textUserInput)
-                    .then(response => {
-                        // this.movieSearched = []
-                        console.log(response.data.results.length);
-                        for (let i = 0; i < response.data.results.length; i++) {
-                            const element = response.data.results[i];
-                            visti.push(element)
-                        }
-                        
-                        console.log("========SI=============");
-                        this.movieSearched = visti
-                        console.log(visti);
-                    })
-                    .catch(error => {
-                        console.error(error);
-                    })
+                this.movieSearched = response.data.results
+                console.log(this.movieSearched);
+                this.popular = false;
+                this.searies = false,
+                this.movie = true;
             })
             .catch(error => {
                 console.error(error);
@@ -61,11 +45,23 @@ export const store = reactive({
         axios.get(this.apiCallTvSeries + this.keyApi + this.reserchApiWhitName + this.textUserInput)
             .then(response => {
                 // this.movieSearched = []
-                this.movieSearched = response.data.results
-                console.log("========SI=============");
+                this.seriesSerched = response.data.results
+                console.log(this.seriesSerched);
+                this.movie = false;
+                this.popular = false;
+                this.searies = true;
             })
             .catch(error => {
                 console.error(error);
             })
     },
+
+    specificSerched(){
+        if (this.searies) {
+            this.callSeriesTV()
+        } else {
+            this.callApi()
+        }
+        // this.textUserInput = ""; svuota campo input
+    }
 });
