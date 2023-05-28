@@ -16,7 +16,7 @@ export default {
 </script>
 
 <template>
-    <div class="bg-black p-4 test">
+    <div class="bg-black p-4 ContentBox">
         <h1 class="text-white">Popular Series</h1>
         <div class="filmHome d-flex">
             <CardFilm v-for="film in store.popularSeries" :imgPath="film.poster_path" :title="film.name"
@@ -27,7 +27,7 @@ export default {
 </template>
 
 <style scoped>
-.test{
+.ContentBox{
     width: 100vw;
     overflow-x: auto;
 }

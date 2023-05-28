@@ -15,10 +15,14 @@ export default {
     },
     methods:{
         callPopularMovie(){
-            axios.get(this.store.urlAPI + "movie/popular" + store.keyApi + "&language=it_IT")
+            store.popularMovie = []
+            axios.get(this.store.urlAPI + "movie/popular" + store.keyApi)
             .then(Response => {
-                store.popularMovie = Response.data.results;
-                console.log(store.popularMovie);
+                for (let i = 0; i < Response.data.results.length; i++) {
+                    store.creditsCall(Response.data.results[i].id, store.popularMovie, "movie");
+
+                }
+                
                 store.movie = false
                 store.searies = false,
                 store.popular = true
@@ -28,10 +32,13 @@ export default {
             })
         },
         callPopularSeries(){
-            axios.get(this.store.urlAPI + "tv/popular" + store.keyApi + "&language=it_IT")
+            store.popularSeries = []
+            axios.get(this.store.urlAPI + "tv/popular" + store.keyApi)
             .then(Response => {
-                store.popularSeries = Response.data.results;
-                console.log(store.popularMovie);
+                for (let i = 0; i < Response.data.results.length; i++) {
+                    store.creditsCall(Response.data.results[i].id, store.popularSeries, "tv");
+                    // console.log(store.popularSeries);
+                }
             })
             .catch(error => {
                 console.error(error);
@@ -40,8 +47,8 @@ export default {
 
     },
     mounted(){
-        this.callPopularMovie(),
-        this.callPopularSeries()
+        this.callPopularMovie();
+        this.callPopularSeries();
     }
 }
 </script>
@@ -51,18 +58,18 @@ export default {
         <div class="container justify-content-between bg-black d-flex">
             <!-- left -->
             <div class="d-flex align-items-center">
-                <img class="img_fluid" src="/public/Logonetflix.png" alt="">
+                <img @click=" this.callPopularMovie(),this.callPopularSeries()" class="img_fluid cursor" src="/public/Logonetflix.png" alt="">
                 <ul class="m-0 text-white d-flex">
-                    <li @click=" this.callPopularMovie(),this.callPopularSeries()" class="btn">
+                    <li @click=" this.callPopularMovie(),this.callPopularSeries()" class="btn" :class="store.popular ? 'text-danger' : 'text-white'">
                         Home
                     </li>
                     <li @click="store.callSeriesTV()" :class="store.searies ? 'text-warning' : 'text-white'" class="btn">
                         Serie Tv
                     </li>
-                    <li class="btn" @click="store.callApi()" :class="store.movie ? 'text-warning' : 'text-white'" >
+                    <li class="btn" @click="store.CallMovie()" :class="store.movie ? 'text-warning' : 'text-white'" >
                         Film
                     </li>
-                    <li class="btn ">
+                    <li class="btn">
                         Novita e Popolari
                     </li>
                     <li class="btn ">
@@ -81,6 +88,12 @@ export default {
             </div>
         </div>
     </div>
+    <!-- <div>
+        <video width="320" height="240" controls>
+            <source src="https://api.themoviedb.org/3/movie/605692/videos?language=en-US" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div> -->
 </template>
 
 <style lang="scss" scoped>
@@ -98,5 +111,9 @@ li {
     &:hover{
         color: red;
     }
+}
+
+.cursor{
+    cursor: pointer;
 }
 </style>

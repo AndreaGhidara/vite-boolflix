@@ -25,7 +25,7 @@ export const store = reactive({
     seriesSerched: [],
 
 
-    callApi() {
+    CallMovie() {
         // let visti = []
         axios.get(this.apiCallMovie + this.keyApi + this.reserchApiWhitName + this.textUserInput)
             .then(response => {
@@ -60,8 +60,19 @@ export const store = reactive({
         if (this.searies) {
             this.callSeriesTV()
         } else {
-            this.callApi()
+            this.CallMovie()
         }
         // this.textUserInput = ""; svuota campo input
+    },
+
+    creditsCall(numero, content, spec){
+        // axios.get(this.urlAPI + this.keyApi + "/movie/447365/credits?language=en-US")
+        axios.get('https://api.themoviedb.org/3/' + spec + '/' + parseInt(numero) + '?api_key=987f78e31f79816590f58712bc4ff386&append_to_response=credits')
+        .then(response => {
+            content.push(response.data)
+        })
+        .catch(error =>{
+            console.error(error);
+        })
     }
 });

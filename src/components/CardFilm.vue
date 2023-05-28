@@ -35,10 +35,15 @@ export default {
             <img v-if="imgPath" :src="store.imgApiPath + imgPath" class="img-fluid">
             <img v-else src="https://m.media-amazon.com/images/I/617m4SsVIzL._AC_SX425_.jpg" class="img-fluid">
             <div class=" m-1 info" style="width: 18rem;">
-                <h4>-{{ title }} </h4>
-                <h4>
-                    Titolo originale: {{ originalTitle }}
-                </h4>
+                <div class="titleBox">
+                    <h4>{{ title }} </h4>
+                    <h5>
+                        <strong>
+                            Original Title:
+                        </strong>
+                        {{ originalTitle }}
+                    </h5>
+                </div>
                 <div>
                     <div v-if="language == 'en'">
                         <country-flag country='gb' size='medium'/>
@@ -59,8 +64,9 @@ export default {
                         <country-flag :country="language"  size='medium'/>
                     </div>
                 </div>
-                <p> Voto:{{ Math.round(vote / 2) }}
+                <p> Score:{{ Math.round(vote / 2) }}
                     <i v-for="index in Math.round(vote / 2)" :key="index" class="fa-solid fa-star"></i>
+                    <i v-for="index in (5 - (Math.round(vote / 2)))" :key="index" class="fa-regular fa-star"></i>
                 </p>
                 <p class="description">
                     Overview: {{ description }}
@@ -91,6 +97,7 @@ img {
             display: block;
         }
     }
+
 
     .info {
         display: none; 
