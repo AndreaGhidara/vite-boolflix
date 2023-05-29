@@ -22,7 +22,7 @@ export default {
                     store.creditsCall(Response.data.results[i].id, store.popularMovie, "movie");
 
                 }
-                
+                // console.log(store.popularMovie);
                 store.movie = false
                 store.searies = false,
                 store.popular = true
@@ -35,10 +35,11 @@ export default {
             store.popularSeries = []
             axios.get(this.store.urlAPI + "tv/popular" + store.keyApi)
             .then(Response => {
+                // console.log(Response.data.results);
                 for (let i = 0; i < Response.data.results.length; i++) {
                     store.creditsCall(Response.data.results[i].id, store.popularSeries, "tv");
-                    // console.log(store.popularSeries);
                 }
+                console.log(store.popularSeries);
             })
             .catch(error => {
                 console.error(error);

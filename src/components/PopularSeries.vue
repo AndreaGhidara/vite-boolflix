@@ -20,10 +20,11 @@ export default {
         <h1 class="text-white">Popular Series</h1>
         <div class="filmHome d-flex">
             <CardFilm v-for="film in store.popularSeries" :imgPath="film.poster_path" :title="film.name"
-                :originalTitle="film.original_title" :language="film.original_language" :vote="film.vote_average"
-                :description="film.overview" />
+            :originalTitle="film.original_title" :cast="store.getCast(film.credits.cast)" :language="film.original_language" :vote="film.vote_average"
+            :description="film.overview" />
         </div>
     </div>
+    <!-- :cast="store.getCast(film.credits.cast)" -->
 </template>
 
 <style scoped>

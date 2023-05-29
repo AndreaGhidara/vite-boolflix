@@ -9,18 +9,21 @@ export default {
     },
     data() {
         return {
-            store
+            store,
         }
+    },
+    methods: {
+        
     }
 }
 </script>
-
+<!--  -->
 <template>
     <div class="bg-black p-4 ContentBox">
         <h1 class="text-white">Popular Movie</h1>
         <div class="filmHome d-flex">
-            <CardFilm v-for="film in store.popularMovie" :imgPath="film.poster_path" :title="film.title"
-                :originalTitle="film.original_title" :language="film.original_language" :vote="film.vote_average"
+            <CardFilm v-for="film,i in store.popularMovie" :imgPath="film.poster_path" :title="film.title"
+                :originalTitle="film.original_title" :cast="store.getCast(film.credits.cast)" :language="film.original_language" :vote="film.vote_average"
                 :description="film.overview" />
         </div>
     </div>

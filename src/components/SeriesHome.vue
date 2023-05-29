@@ -22,7 +22,7 @@ export default {
     <div class="bg-black p-4 test">
         <h1 class="text-white">Searched-Series : {{ store.textUserInput }}</h1>
         <div class="filmHome d-flex">
-            <CardFilm v-for="film in store.seriesSerched" :imgPath="film.poster_path" :title="film.name"
+            <CardFilm v-for="film in store.seriesSerched" :imgPath="film.poster_path" :title="film.name" :cast="store.getCast(film.credits.cast)"
                 :language="film.original_language" :vote="film.vote_average"
                 :description="film.overview" />
         </div>

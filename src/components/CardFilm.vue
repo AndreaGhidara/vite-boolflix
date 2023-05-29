@@ -12,6 +12,8 @@ export default {
         language: String,
         vote: Number,
         description: String,
+        cast:String,
+        
     },
     components: {
         CountryFlag
@@ -60,6 +62,12 @@ export default {
                     <div v-if="language == 'zh'">
                         <country-flag country='cl' size='medium'/>
                     </div>
+                    <div v-if="language == 'hi'">
+                        <country-flag country='in' size='medium'/>
+                    </div>
+                    <div v-if="language == 'cs'">
+                        <country-flag country='cz' size='medium'/>
+                    </div>
                     <div v-else>
                         <country-flag :country="language"  size='medium'/>
                     </div>
@@ -68,8 +76,11 @@ export default {
                     <i v-for="index in Math.round(vote / 2)" :key="index" class="fa-solid fa-star"></i>
                     <i v-for="index in (5 - (Math.round(vote / 2)))" :key="index" class="fa-regular fa-star"></i>
                 </p>
+                <div class="bg-warning">
+                    Cast : {{cast}}
+                </div>
                 <p class="description">
-                    Overview: {{ description }}
+                    Genere: {{ description }}
                 </p>
             </div>
         </div>
