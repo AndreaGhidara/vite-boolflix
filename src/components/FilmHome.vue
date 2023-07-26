@@ -19,9 +19,11 @@ export default {
     <div class="bg-black p-4 ContentBox">
         <h1 class="text-white">Searched-Film: {{ store.textUserInput }}</h1>
         <div class="filmHome d-flex">
-            <CardFilm v-for="film in store.movieSearched" :imgPath="film.poster_path" :title="film.title"
-                :originalTitle="film.original_title" :language="film.original_language" :vote="film.vote_average" :cast="store.getCast(film.credits.cast)"
-                :description="film.overview" />
+            <template v-for="film in store.movieSearched" :key="film">
+                <CardFilm :imgPath="film.poster_path" :title="film.title"
+                    :originalTitle="film.original_title" :language="film.original_language" :vote="film.vote_average" :cast="store.getCast(film.credits.cast)"
+                    :description="film.overview" />
+            </template>
         </div>
     </div>
 </template>

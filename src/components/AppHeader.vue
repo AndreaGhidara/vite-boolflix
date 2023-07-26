@@ -55,11 +55,11 @@ export default {
 </script>
 
 <template>
-    <div class="bg-black">
+    <div class="bg-black py-3">
         <div class="container justify-content-between bg-black d-flex">
             <!-- left -->
             <div class="d-flex align-items-center">
-                <img @click=" this.callPopularMovie(),this.callPopularSeries()" class="img_fluid cursor" src="/public/Logonetflix.png" alt="">
+                <img @click=" this.callPopularMovie(),this.callPopularSeries()" class="img_fluid cursor" src="/public/logo.png" alt="">
                 <ul class="m-0 text-white d-flex">
                     <li @click=" this.callPopularMovie(),this.callPopularSeries()" class="btn" :class="store.popular ? 'text-danger' : 'text-white'">
                         Home

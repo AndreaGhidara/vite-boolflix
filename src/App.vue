@@ -6,6 +6,7 @@ import FilmHome from './components/FilmHome.vue';
 import PopularMovie from './components/PopularMovie.vue';
 import PopularSeries from './components/PopularSeries.vue';
 import SeriesHome from './components/SeriesHome.vue'
+import Jumbotron from './components/Jumbotron.vue';
 
 import {store} from './data/store'
 
@@ -16,7 +17,8 @@ export default {
     FilmHome,
     SeriesHome,
     PopularMovie,
-    PopularSeries
+    PopularSeries,
+    Jumbotron,
 },
   data() {
     return {
@@ -35,6 +37,7 @@ export default {
 
 <template>
   <AppHeader />
+  <Jumbotron />
   <div v-if="store.popular">
     <PopularMovie />
     <PopularSeries />
